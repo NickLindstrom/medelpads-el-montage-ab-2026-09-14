@@ -159,7 +159,7 @@
       var article = document.createElement('article');
       article.className = 'service-card';
       article.innerHTML = [
-        '<div class="service-card__media' + (image ? ' service-card__media--image' : '') + '">' + image + '<span class="service-card__badge">Tjänst</span></div>',
+        '<div class="service-card__media' + (image ? ' service-card__media--image' : '') + '">' + image,
         '<h3 class="service-card__title">' + escapeHtml(item.title) + '</h3>',
         '<p class="service-card__text">' + escapeHtml(item.description) + '</p>'
       ].join('');
