@@ -39,15 +39,27 @@
     "items": [
       {
         "title": "Elinstallationer",
-        "description": "Installation och anpassning av el i bostäder, fastigheter och industrimiljöer."
+        "description": "Installation och anpassning av el i bostäder, fastigheter och industrimiljöer.",
+        "image": {
+          "url": "assets/generated/medelpads-el-montage-ab-services-items-0-image.jpg",
+          "alt": ""
+        }
       },
       {
         "title": "Automation",
-        "description": "Smarta och funktionella automationslösningar för verksamheter och tekniska anläggningar."
+        "description": "Smarta och funktionella automationslösningar för verksamheter och tekniska anläggningar.",
+        "image": {
+          "url": "",
+          "alt": ""
+        }
       },
       {
         "title": "Service inom el och automation",
-        "description": "Löpande service, felsökning och åtgärder för att hålla anläggningar driftsäkra."
+        "description": "Löpande service, felsökning och åtgärder för att hålla anläggningar driftsäkra.",
+        "image": {
+          "url": "assets/generated/medelpads-el-montage-ab-services-items-2-image.jpg",
+          "alt": ""
+        }
       }
     ]
   },
@@ -110,8 +122,11 @@
   },
   "media": {
     "logoUrl": "assets/generated/medelpads-el-montage-ab-logo.png",
+    "headerLogoOnly": true,
+    "logoWidth": "350px",
+    "imageRatio": "",
     "heroImage": {
-      "url": "",
+      "url": "assets/generated/medelpads-el-montage-ab-services-items-0-image.jpg",
       "alt": "Medelpads el & montage AB - el och automation"
     },
     "aboutImage": {
