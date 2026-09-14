@@ -8,8 +8,10 @@
   --color-border: rgba(23, 32, 51, 0.12);
   --color-primary: #1254c5;
   --color-primary-dark: #0f43a0;
+  --color-secondary: #172033;
   --color-accent: #e5a53d;
   --color-shadow: rgba(23, 32, 51, 0.12);
+  --content-image-ratio: 4 / 3;
   --container-width: 1140px;
   --radius-large: 28px;
   --radius-medium: 18px;
@@ -123,6 +125,7 @@ a {
   font-family: Arial, sans-serif;
   font-weight: 800;
   font-size: 1rem;
+  color: var(--color-secondary);
 }
 
 .brand-mark--footer {
@@ -131,8 +134,12 @@ a {
 
 .brand-mark__logo {
   width: 42px;
-  height: 42px;
+  height: auto;
   flex: 0 0 auto;
+}
+
+.brand-mark--logo-only {
+  gap: 0;
 }
 
 .nav-toggle {
@@ -226,7 +233,8 @@ a {
 
 .button--secondary {
   background: var(--color-surface-strong);
-  border: 1px solid var(--color-border);
+  border: 1px solid color-mix(in srgb, var(--color-secondary) 32%, var(--color-border));
+  color: var(--color-secondary);
 }
 
 .hero-visual,
@@ -250,12 +258,14 @@ a {
 .hero-visual__main-card,
 .about-media__image-frame {
   overflow: hidden;
+  aspect-ratio: var(--content-image-ratio);
 }
 
 .hero-visual__image,
 .about-media__image {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 
 .hero-visual__floating-card {
@@ -323,7 +333,7 @@ a {
   content: "•";
   position: absolute;
   left: 0;
-  color: var(--color-accent);
+  color: var(--color-secondary);
   font-size: 1.2rem;
   font-weight: 900;
 }
@@ -348,12 +358,26 @@ a {
 }
 
 .service-card__media {
+  position: relative;
   height: 180px;
   margin-bottom: 1rem;
   border-radius: var(--radius-medium);
+  overflow: hidden;
   background:
     linear-gradient(135deg, rgba(18, 84, 197, 0.16), rgba(229, 165, 61, 0.2)),
     url("assets/detail-pattern.svg") center/cover no-repeat;
+}
+
+.service-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.service-card__media--image .service-card__badge {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
 }
 
 .service-card__title,
@@ -403,7 +427,7 @@ a {
 .site-footer {
   padding: 2rem 0 1rem;
   background:
-    linear-gradient(180deg, #14213d 0%, #0f172a 100%);
+    linear-gradient(180deg, color-mix(in srgb, var(--color-secondary) 92%, #ffffff) 0%, var(--color-secondary) 100%);
   color: #ffffff;
 }
 
@@ -459,7 +483,7 @@ a {
 
 .gallery-card__image {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: var(--content-image-ratio);
   object-fit: cover;
 }
 @media (max-width: 920px) {
