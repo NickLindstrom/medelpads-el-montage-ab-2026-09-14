@@ -1,72 +1,79 @@
-﻿{
+{
   "site": {
-    "siteId": "00000000-0000-0000-0000-000000000000",
-    "companyName": "Exempel Elservice AB",
-    "displayName": "Exempel Elservice",
+    "siteId": "c9d2cf31-7674-4219-a273-df7b22b0bd43",
+    "companyName": "Medelpads el & montage AB",
+    "displayName": "Medelpads el & montage AB",
     "language": "sv",
-    "primaryColor": "#1254c5",
-    "secondaryColor": "#172033"
+    "primaryColor": "#f2b406",
+    "secondaryColor": "#000000",
+    "theme": "classic",
+    "themeMode": "light"
   },
   "seo": {
-    "title": "Exempel Elservice i Stockholm | Elektriker för hem och företag",
-    "description": "Exempel Elservice hjälper privatpersoner och företag med elinstallationer, felsökning och laddboxar i Stockholm med omnejd.",
+    "title": "Medelpads el & montage AB | Elinstallation och automation i Sundsvall",
+    "description": "Medelpads el & montage AB erbjuder elinstallationer, automation och service inom el och automation för bostäder, fastigheter och industrier i Sundsvall med omnejd.",
     "keywords": [
-      "elektriker stockholm",
-      "laddbox",
-      "elinstallation"
+      "elinstallation",
+      "automation",
+      "elsservice",
+      "elektriker",
+      "Sundsvall",
+      "bostäder",
+      "fastigheter",
+      "industrier"
     ]
   },
   "hero": {
-    "eyebrow": "Elektriker i Stockholm",
-    "headline": "Trygg hjälp med elinstallationer och service",
-    "subheadline": "Vi hjälper privatpersoner och företag med säkra, smidiga och professionella ellösningar i Stockholm.",
-    "primaryCtaLabel": "Begär offert",
-    "primaryCtaHref": "#contact"
+    "eyebrow": "El och automation i Sundsvall",
+    "headline": "Rätt utfört elarbete för bostäder, fastigheter och industrier",
+    "subheadline": "Medelpads el & montage AB levererar elinstallationer, automation och service inom el och automation med fokus på kvalitet, tydlighet och hållbara lösningar.",
+    "primaryCtaLabel": "Kontakta oss",
+    "primaryCtaHref": "#kontakt"
   },
   "intro": {
-    "heading": "Din lokala expert",
-    "body": "Vi erbjuder snabb återkoppling, tydliga priser och väl utförda arbeten för både små och stora uppdrag."
+    "heading": "Trygga lösningar inom el och automation",
+    "body": "Vi hjälper privatpersoner, företag och fastighetsägare med installationer, felsökning och service inom el och automation. Med lokal förankring i Sundsvall och ett professionellt arbetssätt ser vi till att arbetet blir utfört på rätt sätt, i rätt tid och till rätt pris."
   },
   "services": {
     "heading": "Våra tjänster",
     "items": [
       {
         "title": "Elinstallationer",
-        "description": "Installation av belysning, eluttag, centraler och fasta elarbeten."
+        "description": "Installation och anpassning av el i bostäder, fastigheter och industrimiljöer."
       },
       {
-        "title": "Felsökning",
-        "description": "Snabb felsökning och åtgärd vid akuta eller återkommande elproblem."
+        "title": "Automation",
+        "description": "Smarta och funktionella automationslösningar för verksamheter och tekniska anläggningar."
       },
       {
-        "title": "Laddboxar",
-        "description": "Installation och rådgivning kring laddboxar för villa och företag."
+        "title": "Service inom el och automation",
+        "description": "Löpande service, felsökning och åtgärder för att hålla anläggningar driftsäkra."
       }
     ]
   },
   "about": {
-    "heading": "Om oss",
-    "body": "Exempel Elservice är ett erfaret företag som sätter säkerhet, tydlighet och god service i första rummet. Vårt mål är att göra det enkelt att få rätt hjälp direkt."
+    "heading": "Om Medelpads el & montage AB",
+    "body": "Medelpads el & montage AB arbetar med el och automation för både mindre och större uppdrag. Vi kombinerar praktisk erfarenhet med ett noggrant och professionellt utförande. Utöver verksamheten inom el och montage äger och förvaltar bolaget även fastigheter samt kan bedriva handel med värdepapper."
   },
   "usp": {
     "heading": "Därför väljer kunder oss",
     "items": [
-      "Snabb återkoppling",
-      "Certifierad kompetens",
-      "Tydliga priser"
+      "Rätt utfört",
+      "I tid",
+      "Till rätt pris"
     ]
   },
   "testimonials": {
-    "heading": "Vad kunder säger",
+    "heading": "Vad våra kunder säger",
     "enabled": true,
     "items": [
       {
-        "name": "Anna",
-        "quote": "Snabb hjälp och väldigt proffsigt bemötande."
+        "name": "Kund i Sundsvall",
+        "quote": "Professionellt bemötande och ett noggrant utfört arbete från start till mål."
       },
       {
-        "name": "Johan",
-        "quote": "Tydlig offert, bra kommunikation och snyggt utfört arbete."
+        "name": "Fastighetsägare",
+        "quote": "Tydlig kommunikation, bra lösningar och leverans enligt plan."
       }
     ]
   },
@@ -75,42 +82,43 @@
     "enabled": true,
     "items": [
       {
-        "question": "Vilka områden arbetar ni i?",
-        "answer": "Vi arbetar främst i Stockholm med omnejd."
+        "question": "Vilka typer av uppdrag tar ni?",
+        "answer": "Vi utför elinstallationer, automation och service inom el och automation för bostäder, fastigheter och industrier."
       },
       {
-        "question": "Kan jag få offert innan arbete påbörjas?",
-        "answer": "Ja, vi erbjuder tydliga offerter innan vi sätter igång."
+        "question": "Arbetar ni med både privatpersoner och företag?",
+        "answer": "Ja, vi hjälper både privatpersoner, företag och fastighetsägare med anpassade lösningar."
+      },
+      {
+        "question": "Var utgår ni ifrån?",
+        "answer": "Vi har vår verksamhet i Sundsvall och arbetar lokalt med omnejd."
       }
     ]
   },
   "contact": {
     "heading": "Kontakta oss",
-    "body": "Hör av dig så återkommer vi så snart vi kan.",
-    "phone": "0701234567",
-    "email": "kontakt@exempel.se",
-    "address": "Exempelgatan 1, 111 22 Stockholm"
+    "body": "Hör av dig om du behöver hjälp med elinstallation, automation eller service. Vi återkommer så snart vi kan med ett förslag på nästa steg.",
+    "email": "hasse@memontag.se",
+    "phone": "070 493 39 41",
+    "address": "Kungsnäs 129, 855 91, Sundsvall"
   },
   "footer": {
-    "companyName": "Exempel Elservice AB",
-    "tagline": "Professionella elarbeten för privatpersoner och företag.",
-    "copyright": "© 2026 Exempel Elservice AB",
-    "socialLinks": {
-      "facebook": "",
-      "instagram": "",
-      "linkedin": ""
-    }
+    "companyName": "Medelpads el & montage AB",
+    "tagline": "El och automation med fokus på kvalitet, precision och lokal service.",
+    "copyright": "© 2026 Medelpads el & montage AB",
+    "socialLinks": {}
   },
   "media": {
-    "logoUrl": null,
+    "logoUrl": "assets/generated/medelpads-el-montage-ab-logo.png",
     "heroImage": {
       "url": "",
-      "alt": ""
+      "alt": "Medelpads el & montage AB - el och automation"
     },
     "aboutImage": {
       "url": "",
-      "alt": ""
+      "alt": "Om Medelpads el & montage AB"
     },
+    "galleryHeading": "",
     "gallery": []
   }
 }
