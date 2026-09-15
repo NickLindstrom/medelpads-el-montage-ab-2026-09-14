@@ -6,6 +6,11 @@
     "language": "sv",
     "primaryColor": "#f2b406",
     "secondaryColor": "#000000",
+    "headingFont": "Georgia, \"Times New Roman\", serif",
+    "bodyFont": "Arial, sans-serif",
+    "headerBackgroundColor": "",
+    "mainBackgroundColor": "",
+    "footerBackgroundColor": "",
     "theme": "classic",
     "themeMode": "light"
   },
@@ -118,6 +123,13 @@
       }
     ]
   },
+  "openingHours": {
+    "enabled": true,
+    "eyebrow": "Öppettider",
+    "heading": "Öppettider",
+    "body": "",
+    "days": []
+  },
   "contact": {
     "enabled": true,
     "eyebrow": "Kontakt",
@@ -125,7 +137,7 @@
     "body": "Hör av dig om du behöver hjälp med elinstallation, automation eller service. Vi återkommer så snart vi kan med ett förslag på nästa steg.",
     "email": "hasse@memontage.se",
     "phone": "070 493 39 41",
-    "address": ""
+    "address": "Sundsvall, Sverige"
   },
   "footer": {
     "enabled": true,
