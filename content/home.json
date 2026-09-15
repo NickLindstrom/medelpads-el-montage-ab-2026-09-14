@@ -163,5 +163,12 @@
     "galleryEyebrow": "Bilder",
     "galleryHeading": "",
     "gallery": []
+  },
+  "security": {
+    "csp": {
+      "enabled": true,
+      "allowAnyHttpsImages": true,
+      "extraImageSources": []
+    }
   }
 }
