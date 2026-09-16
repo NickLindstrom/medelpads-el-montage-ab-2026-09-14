@@ -535,3 +535,6 @@ a {
     justify-content: flex-start;
   }
 }
+
+.button--ghost { background: transparent; border: 1px solid color-mix(in srgb, var(--color-primary) 42%, var(--color-border)); color: var(--color-primary); }
+.button--secondary-ghost { background: transparent; border: 1px solid color-mix(in srgb, var(--color-secondary) 42%, var(--color-border)); color: var(--color-secondary); }

@@ -34,7 +34,15 @@
     "headline": "Rätt utfört elarbete för bostäder, fastigheter och industrier",
     "subheadline": "Medelpads el & montage AB levererar elinstallationer, automation och service inom el och automation med fokus på kvalitet, tydlighet och hållbara lösningar.",
     "primaryCtaLabel": "Kontakta oss",
-    "primaryCtaHref": "#kontakt"
+    "primaryCtaHref": "#contact",
+    "buttons": [
+      {
+        "label": "Kontakta oss",
+        "variant": "primary",
+        "linkType": "section",
+        "target": "contact"
+      }
+    ]
   },
   "intro": {
     "enabled": true,
