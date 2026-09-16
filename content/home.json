@@ -156,6 +156,7 @@
   },
   "media": {
     "logoUrl": "assets/generated/medelpads-el-montage-ab-logo.png",
+    "faviconUrl": null,
     "headerLogoOnly": true,
     "logoWidth": "350px",
     "imageRatio": "",
