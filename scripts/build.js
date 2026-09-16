@@ -1333,17 +1333,9 @@ function renderPage(content) {
   const openingHoursVisible =
     openingHours.enabled !== false && hasText(openingHoursHtml);
 
-  html = setText(
-    html,
-    "opening-hours-eyebrow",
-    openingHours.eyebrow || "Öppettider",
-  );
+  html = setText(html, "opening-hours-eyebrow", openingHours.eyebrow || "");
 
-  html = setText(
-    html,
-    "opening-hours-heading",
-    openingHours.heading || "Öppettider",
-  );
+  html = setText(html, "opening-hours-heading", openingHours.heading || "");
 
   html = setText(html, "opening-hours-body", openingHours.body || "");
 
