@@ -457,6 +457,30 @@ function setTitle(html, title) {
   );
 }
 
+function getFaviconMimeType(value) {
+  const pathname = String(value || "")
+    .split(/[?#]/, 1)[0]
+    .toLowerCase();
+
+  if (pathname.endsWith(".svg")) return "image/svg+xml";
+  if (pathname.endsWith(".ico")) return "image/x-icon";
+  if (pathname.endsWith(".jpg") || pathname.endsWith(".jpeg"))
+    return "image/jpeg";
+  if (pathname.endsWith(".webp")) return "image/webp";
+  return "image/png";
+}
+
+function applyFavicon(html, content) {
+  const href = content.media?.faviconUrl || "assets/sajt24-favicon.svg";
+  html = setAttributeById(html, "site-favicon", "href", href);
+  return setAttributeById(
+    html,
+    "site-favicon",
+    "type",
+    getFaviconMimeType(href),
+  );
+}
+
 function upsertHeadLink(html, rel, href) {
   if (!hasText(href)) {
     return html;
@@ -523,33 +547,21 @@ function renderServices(items = []) {
     .join("");
 }
 
-function getFaviconMimeType(value) {
-  const pathname = String(value || "").split(/[?#]/, 1)[0].toLowerCase();
-
-  if (pathname.endsWith(".svg")) return "image/svg+xml";
-  if (pathname.endsWith(".ico")) return "image/x-icon";
-  if (pathname.endsWith(".jpg") || pathname.endsWith(".jpeg")) return "image/jpeg";
-  if (pathname.endsWith(".webp")) return "image/webp";
-  return "image/png";
-}
-
-function applyFavicon(html, content) {
-  const href = content.media?.faviconUrl || "assets/sajt24-favicon.svg";
-  html = setAttributeById(html, "site-favicon", "href", href);
-  return setAttributeById(html, "site-favicon", "type", getFaviconMimeType(href));
-}
-
 function getHeroButtons(content) {
   const hero = content.hero || {};
   const buttons = Array.isArray(hero.buttons)
     ? hero.buttons
     : hasText(hero.primaryCtaLabel)
-      ? [{
-          label: hero.primaryCtaLabel,
-          variant: "primary",
-          linkType: String(hero.primaryCtaHref || "").startsWith("#") ? "section" : "external",
-          target: String(hero.primaryCtaHref || "#contact").replace(/^#/, ""),
-        }]
+      ? [
+          {
+            label: hero.primaryCtaLabel,
+            variant: "primary",
+            linkType: String(hero.primaryCtaHref || "").startsWith("#")
+              ? "section"
+              : "external",
+            target: String(hero.primaryCtaHref || "#contact").replace(/^#/, ""),
+          },
+        ]
       : [];
 
   return buttons.filter(
@@ -571,15 +583,24 @@ function renderHeroButtons(content) {
       : theme === "showcase"
         ? "showcase-button showcase-button--"
         : "button button--";
-  const allowedVariants = new Set(["primary", "secondary", "ghost", "secondary-ghost"]);
+  const allowedVariants = new Set([
+    "primary",
+    "secondary",
+    "ghost",
+    "secondary-ghost",
+  ]);
 
   return getHeroButtons(content)
     .map((button, index) => {
-      const variant = allowedVariants.has(button.variant) ? button.variant : "primary";
-      const externalAttributes = button.linkType === "external"
-        ? ' target="_blank" rel="noopener noreferrer"'
-        : "";
+      const variant = allowedVariants.has(button.variant)
+        ? button.variant
+        : "primary";
+      const externalAttributes =
+        button.linkType === "external"
+          ? ' target="_blank" rel="noopener noreferrer"'
+          : "";
       const id = index === 0 ? ' id="hero-primary-cta"' : "";
+
       return `<a${id} class="${classPrefix}${variant}" href="${escapeHtml(getHeroButtonHref(button))}"${externalAttributes}>${escapeHtml(button.label)}</a>`;
     })
     .join("");
@@ -724,13 +745,21 @@ function renderGallery(items = []) {
     .map(
       (item) => `
         <figure class="gallery-card">
-          <img
-            class="gallery-card__image"
-            src="${escapeHtml(item.url)}"
-            alt="${escapeHtml(item.alt || "")}"
-            loading="lazy"
-            decoding="async"
+          <button
+            class="gallery-card__button"
+            type="button"
+            data-gallery-full-src="${escapeHtml(item.url)}"
+            data-gallery-alt="${escapeHtml(item.alt || "")}"
+            aria-label="Visa bild i fullstorlek"
           >
+            <img
+              class="gallery-card__image"
+              src="${escapeHtml(item.url)}"
+              alt="${escapeHtml(item.alt || "")}"
+              loading="lazy"
+              decoding="async"
+            >
+          </button>
         </figure>
       `,
     )
@@ -800,6 +829,14 @@ function renderBrand(content, footer = false) {
 }
 
 function renderOpeningHoursDays(days = []) {
+  const hasAnyTime = days.some(
+    (item) => item && (hasText(item.opens) || hasText(item.closes)),
+  );
+
+  if (!hasAnyTime) {
+    return "";
+  }
+
   return days
     .filter(
       (item) =>
@@ -825,6 +862,24 @@ function renderOpeningHoursDays(days = []) {
       `;
     })
     .join("");
+}
+
+function hasConfiguredOpeningHours(openingHours = {}) {
+  if (openingHours.alwaysOpen === true) {
+    return true;
+  }
+
+  const days = Array.isArray(openingHours.days) ? openingHours.days : [];
+
+  return days.some(
+    (item) => item && (hasText(item.opens) || hasText(item.closes)),
+  );
+}
+
+function isOpeningHoursVisible(openingHours = {}) {
+  return (
+    openingHours.enabled !== false && hasConfiguredOpeningHours(openingHours)
+  );
 }
 
 /* -------------------------------------------------------------------------- */
@@ -891,6 +946,8 @@ function buildJsonLd(content, pageUrl) {
 
   const openingHours = content.openingHours || {};
 
+  const openingHoursVisible = isOpeningHoursVisible(openingHours);
+
   const schemaDayNames = {
     Måndag: "Monday",
     Tisdag: "Tuesday",
@@ -933,25 +990,34 @@ function buildJsonLd(content, pageUrl) {
     ),
   );
 
-  const openingHoursSpecification = Array.isArray(openingHours.days)
-    ? openingHours.days
-        .filter(
-          (item) =>
-            item &&
-            item.closed !== true &&
-            hasText(item.opens) &&
-            hasText(item.closes),
-        )
-        .map((item) => ({
+  const openingHoursSpecification = !openingHoursVisible
+    ? []
+    : openingHours.alwaysOpen === true
+      ? Object.values(schemaDayNames).map((dayOfWeek) => ({
           "@type": "OpeningHoursSpecification",
-
-          dayOfWeek: schemaDayNames[item.day] || item.day,
-
-          opens: item.opens,
-
-          closes: item.closes,
+          dayOfWeek,
+          opens: "00:00",
+          closes: "23:59",
         }))
-    : [];
+      : Array.isArray(openingHours.days)
+        ? openingHours.days
+            .filter(
+              (item) =>
+                item &&
+                item.closed !== true &&
+                hasText(item.opens) &&
+                hasText(item.closes),
+            )
+            .map((item) => ({
+              "@type": "OpeningHoursSpecification",
+
+              dayOfWeek: schemaDayNames[item.day] || item.day,
+
+              opens: item.opens,
+
+              closes: item.closes,
+            }))
+        : [];
 
   const businessType = hasText(site.schemaType)
     ? site.schemaType
@@ -979,6 +1045,10 @@ function buildJsonLd(content, pageUrl) {
 
       legalName: site.companyName || footer.companyName,
 
+      taxID: hasText(site.organizationNumber)
+        ? site.organizationNumber
+        : undefined,
+
       url: /^https?:\/\//i.test(pageUrl) ? pageUrl : undefined,
 
       description: seo.description || contact.body || footer.tagline,
@@ -994,6 +1064,11 @@ function buildJsonLd(content, pageUrl) {
       image: [heroImageUrl].concat(galleryImages).filter(Boolean),
 
       sameAs,
+
+      openingHours:
+        openingHoursVisible && openingHours.alwaysOpen === true
+          ? "Mo-Su 00:00-23:59"
+          : undefined,
 
       openingHoursSpecification,
 
@@ -1183,10 +1258,21 @@ function renderPage(content) {
   html = replaceInnerById(html, "hero-actions", renderHeroButtons(content));
 
   if (firstHeroButton) {
-    html = setLink(html, "nav-cta-link", getHeroButtonHref(firstHeroButton), firstHeroButton.label);
+    html = setLink(
+      html,
+      "nav-cta-link",
+      getHeroButtonHref(firstHeroButton),
+      firstHeroButton.label,
+    );
+
     if (firstHeroButton.linkType === "external") {
       html = setAttributeById(html, "nav-cta-link", "target", "_blank");
-      html = setAttributeById(html, "nav-cta-link", "rel", "noopener noreferrer");
+      html = setAttributeById(
+        html,
+        "nav-cta-link",
+        "rel",
+        "noopener noreferrer",
+      );
     }
   }
 
@@ -1369,13 +1455,27 @@ function renderPage(content) {
 
   html = setText(html, "contact-address", content.contact?.address || "");
 
-  html = setHiddenById(html, "contact", !contactVisible);
+  html = setHiddenById(
+    html,
+    "contact-phone-row",
+    !hasText(content.contact?.phone),
+  );
 
   html = setHiddenById(
     html,
-    "nav-cta-link",
-    heroButtons.length === 0,
+    "contact-email-row",
+    !hasText(content.contact?.email),
   );
+
+  html = setHiddenById(
+    html,
+    "contact-address-row",
+    !hasText(content.contact?.address),
+  );
+
+  html = setHiddenById(html, "contact", !contactVisible);
+
+  html = setHiddenById(html, "nav-cta-link", heroButtons.length === 0);
 
   /* Opening hours */
 
@@ -1385,10 +1485,12 @@ function renderPage(content) {
     ? openingHours.days
     : [];
 
-  const openingHoursHtml = renderOpeningHoursDays(openingHourDays);
+  const openingHoursHtml =
+    openingHours.alwaysOpen === true
+      ? '<div class="opening-hours-row"><span class="opening-hours-row__day">Öppettider</span><span class="opening-hours-row__time">Alltid öppet</span></div>'
+      : renderOpeningHoursDays(openingHourDays);
 
-  const openingHoursVisible =
-    openingHours.enabled !== false && hasText(openingHoursHtml);
+  const openingHoursVisible = isOpeningHoursVisible(openingHours);
 
   html = setText(html, "opening-hours-eyebrow", openingHours.eyebrow || "");
 
@@ -1403,6 +1505,20 @@ function renderPage(content) {
   /* Footer */
 
   html = setText(html, "footer-tagline", content.footer?.tagline || "");
+
+  const organizationNumber = content.site?.organizationNumber;
+
+  html = setText(
+    html,
+    "footer-organization-number",
+    hasText(organizationNumber) ? `Org.nr: ${organizationNumber}` : "",
+  );
+
+  html = setHiddenById(
+    html,
+    "footer-organization-number",
+    !hasText(organizationNumber),
+  );
 
   html = setText(html, "footer-copyright", content.footer?.copyright || "");
 
